@@ -2171,3 +2171,126 @@ input:focus-visible {
         transition-duration: .01ms !important;
     }
 }
+
+/* =========================================================
+   SPOTIFY-STYLE LYRICS ENTRANCE
+   Entrada suave + aparición carácter por carácter
+   Ligero: solo opacity y transform
+========================================================= */
+
+/* Estado normal */
+.lyrics-display {
+    perspective: 700px;
+}
+
+/* Línea anterior */
+.lyrics-display.is-transitioning .previous-lyric {
+    animation: lyricPreviousEnter .42s ease both;
+}
+
+/* Línea principal */
+.lyrics-display.is-transitioning .current-lyric {
+    animation: lyricCurrentEnter .58s cubic-bezier(.2, .75, .25, 1) both;
+}
+
+/* Línea siguiente */
+.lyrics-display.is-transitioning .next-lyric {
+    animation: lyricNextEnter .48s ease both;
+}
+
+/* Entrada de la línea principal */
+@keyframes lyricCurrentEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(19px) scale(.975);
+    }
+
+    65% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Entrada de la línea superior */
+@keyframes lyricPreviousEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    100% {
+        opacity: .65;
+        transform: translateY(2px);
+    }
+}
+
+/* Entrada de la línea inferior */
+@keyframes lyricNextEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: .65;
+        transform: translateY(-2px);
+    }
+}
+
+/* Aparición individual de cada carácter */
+.lyric-character {
+    display: inline-block !important;
+    opacity: 0;
+    transform: translateY(8px) scale(.97);
+
+    animation:
+        lyricCharacterReveal
+        var(--char-duration, 220ms)
+        cubic-bezier(.2, .75, .25, 1)
+        var(--char-delay, 0ms)
+        both !important;
+
+    will-change: auto !important;
+}
+
+@keyframes lyricCharacterReveal {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Brillo estático para no mantener una animación pesada */
+.current-lyric {
+    text-shadow:
+        0 0 14px rgba(167, 139, 250, .22),
+        0 0 26px rgba(167, 139, 250, .08);
+
+    animation: none;
+}
+
+/* Pequeño indicador mientras se escribe la letra */
+.current-lyric.typing-active {
+    color: #ffffff;
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .lyrics-display.is-transitioning .previous-lyric,
+    .lyrics-display.is-transitioning .current-lyric,
+    .lyrics-display.is-transitioning .next-lyric,
+    .lyric-character {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
