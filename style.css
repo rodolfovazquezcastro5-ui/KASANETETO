@@ -2172,37 +2172,57 @@ input:focus-visible {
     }
 }
 
-/* =========================================================
-   SPOTIFY-STYLE LYRICS ENTRANCE
-   Entrada suave + aparición carácter por carácter
-   Ligero: solo opacity y transform
-========================================================= */
+/* =====================================================
+   LYRICS EXPERIENCE — SPOTIFY STYLE
+   Entrada cinematográfica + escritura progresiva
+   Optimizado: sin blur, filtros ni partículas
+===================================================== */
 
-/* Estado normal */
-.lyrics-display {
+/* Contenedor de letras */
+#lyricsDisplay {
     perspective: 700px;
 }
 
-/* Línea anterior */
-.lyrics-display.is-transitioning .previous-lyric {
-    animation: lyricPreviousEnter .42s ease both;
+/* Entrada de la frase completa */
+#lyricsDisplay.is-transitioning .current-lyric,
+#lyricsDisplay.is-transitioning #currentLyric {
+    animation: spotifyLyricEntrance 650ms
+        cubic-bezier(.16, 1, .3, 1) both;
 }
 
-/* Línea principal */
-.lyrics-display.is-transitioning .current-lyric {
-    animation: lyricCurrentEnter .58s cubic-bezier(.2, .75, .25, 1) both;
+/* Entrada de cada carácter */
+#lyricsDisplay .lyric-character {
+    display: inline-block !important;
+    opacity: 0;
+    transform: translate3d(0, 13px, 0) scale(.96);
+
+    animation-name: spotifyCharacterReveal !important;
+    animation-duration: var(--char-duration, 260ms) !important;
+    animation-delay: var(--char-delay, 0ms) !important;
+    animation-timing-function:
+        cubic-bezier(.16, 1, .3, 1) !important;
+    animation-fill-mode: both !important;
+    animation-iteration-count: 1 !important;
 }
 
-/* Línea siguiente */
-.lyrics-display.is-transitioning .next-lyric {
-    animation: lyricNextEnter .48s ease both;
-}
-
-/* Entrada de la línea principal */
-@keyframes lyricCurrentEnter {
+/* Aparición suave de la frase */
+@keyframes spotifyLyricEntrance {
     0% {
         opacity: 0;
-        transform: translateY(19px) scale(.975);
+        transform: translate3d(0, 24px, 0) scale(.97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+/* Escritura carácter por carácter */
+@keyframes spotifyCharacterReveal {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 13px, 0) scale(.96);
     }
 
     65% {
@@ -2211,86 +2231,643 @@ input:focus-visible {
 
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
     }
 }
 
-/* Entrada de la línea superior */
-@keyframes lyricPreviousEnter {
-    0% {
+/* Entrada de las líneas secundarias */
+#lyricsDisplay.is-transitioning .previous-lyric {
+    animation: spotifyPrevious 500ms ease both;
+}
+
+#lyricsDisplay.is-transitioning .next-lyric {
+    animation: spotifyNext 500ms ease both;
+}
+
+@keyframes spotifyPrevious {
+    from {
         opacity: 0;
         transform: translateY(12px);
     }
-
-    100% {
-        opacity: .65;
-        transform: translateY(2px);
+    to {
+        opacity: .55;
+        transform: translateY(0);
     }
 }
 
-/* Entrada de la línea inferior */
-@keyframes lyricNextEnter {
-    0% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    100% {
-        opacity: .65;
-        transform: translateY(-2px);
-    }
-}
-
-/* Aparición individual de cada carácter */
-.lyric-character {
-    display: inline-block !important;
-    opacity: 0;
-    transform: translateY(8px) scale(.97);
-
-    animation:
-        lyricCharacterReveal
-        var(--char-duration, 220ms)
-        cubic-bezier(.2, .75, .25, 1)
-        var(--char-delay, 0ms)
-        both !important;
-
-    will-change: auto !important;
-}
-
-@keyframes lyricCharacterReveal {
+@keyframes spotifyNext {
     from {
         opacity: 0;
-        transform: translateY(8px) scale(.97);
+        transform: translateY(-12px);
     }
-
     to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        opacity: .55;
+        transform: translateY(0);
     }
-}
-
-/* Brillo estático para no mantener una animación pesada */
-.current-lyric {
-    text-shadow:
-        0 0 14px rgba(167, 139, 250, .22),
-        0 0 26px rgba(167, 139, 250, .08);
-
-    animation: none;
-}
-
-/* Pequeño indicador mientras se escribe la letra */
-.current-lyric.typing-active {
-    color: #ffffff;
 }
 
 /* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
-    .lyrics-display.is-transitioning .previous-lyric,
-    .lyrics-display.is-transitioning .current-lyric,
-    .lyrics-display.is-transitioning .next-lyric,
-    .lyric-character {
+    #lyricsDisplay .lyric-character,
+    #lyricsDisplay.is-transitioning .current-lyric,
+    #lyricsDisplay.is-transitioning #currentLyric {
         animation: none !important;
         opacity: 1 !important;
         transform: none !important;
     }
+}
+
+
+/* ============================================================
+   ONEWAY — SPOTIFY-STYLE LYRIC TRANSITIONS
+   Frase que entra, líneas que se superponen y texto carácter a carácter.
+   Requiere que JavaScript cree spans .lyric-character.
+   ============================================================ */
+
+/* El bloque de letras mantiene las líneas apiladas y permite el movimiento. */
+.lyrics-display {
+    perspective: 700px;
+    transform-style: preserve-3d;
+}
+
+/* La frase activa entra desde abajo con una pequeña elevación. */
+.lyrics-display.is-transitioning .current-lyric {
+    animation: onewayLyricCurrentIn 620ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+/* La frase anterior se desplaza hacia arriba mientras pierde presencia. */
+.lyrics-display.is-transitioning .previous-lyric {
+    animation: onewayLyricPreviousOut 520ms cubic-bezier(.2, .7, .2, 1) both;
+}
+
+/* La frase siguiente sube suavemente para ocupar su lugar. */
+.lyrics-display.is-transitioning .next-lyric {
+    animation: onewayLyricNextIn 620ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+@keyframes onewayLyricCurrentIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0) scale(.975);
+    }
+    70% { opacity: 1; }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes onewayLyricPreviousOut {
+    0% {
+        opacity: .65;
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        opacity: .22;
+        transform: translate3d(0, -9px, 0);
+    }
+}
+
+@keyframes onewayLyricNextIn {
+    0% {
+        opacity: .25;
+        transform: translate3d(0, 10px, 0);
+    }
+    100% {
+        opacity: .65;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Cada carácter se revela con un pequeño movimiento ascendente.
+   --char-delay y --char-duration los proporciona JavaScript. */
+.lyrics-display .current-lyric .lyric-character,
+.lyrics-display .lyric-character {
+    display: inline-block !important;
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(.975);
+    animation: onewayCharacterIn
+        var(--char-duration, 260ms)
+        cubic-bezier(.16, 1, .3, 1)
+        var(--char-delay, 0ms)
+        both !important;
+    filter: none !important;
+    will-change: auto;
+}
+
+@keyframes onewayCharacterIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0) scale(.975);
+    }
+    68% { opacity: 1; }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+/* Evita que el brillo infinito original compita con la entrada de la frase. */
+.current-lyric {
+    animation: none;
+}
+
+/* Si el usuario solicita menos movimiento, se muestra el texto sin animación. */
+@media (prefers-reduced-motion: reduce) {
+    .lyrics-display.is-transitioning .current-lyric,
+    .lyrics-display.is-transitioning .previous-lyric,
+    .lyrics-display.is-transitioning .next-lyric,
+    .lyrics-display .lyric-character {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+
+
+
+/* ============================================================
+   ONEWAY — ADAPTIVE DISPLAY + FULLSCREEN / MAXIMIZE
+   No cambia la estructura del reproductor ni sus IDs originales.
+   ============================================================ */
+
+/* Los dos botones del encabezado comparten el mismo grupo. */
+.player-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex: 0 0 auto;
+}
+
+.fullscreen-toggle {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border: 1px solid rgba(226, 210, 255, .17);
+    border-radius: 12px;
+    color: rgba(245, 239, 255, .88);
+    background: rgba(255, 255, 255, .055);
+    transition:
+        background .22s ease,
+        border-color .22s ease,
+        transform .22s ease,
+        color .22s ease;
+}
+
+.fullscreen-toggle svg {
+    width: 17px;
+    height: 17px;
+    display: block;
+}
+
+.fullscreen-toggle .fullscreen-exit-icon {
+    display: none;
+}
+
+.fullscreen-toggle:hover {
+    color: #fff;
+    background: rgba(167, 139, 250, .17);
+    border-color: rgba(196, 165, 255, .48);
+    transform: translateY(-1px);
+}
+
+.fullscreen-toggle:active {
+    transform: scale(.94);
+}
+
+.fullscreen-toggle:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+/* El modo de pantalla completa usa el espacio real disponible. */
+.experience.is-fullscreen,
+.experience:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+    background: #080711;
+}
+
+.experience.is-fullscreen .ambient-interface,
+.experience:fullscreen .ambient-interface {
+    top: clamp(18px, 3.2vh, 34px);
+    left: clamp(20px, 3.5vw, 48px);
+    right: clamp(20px, 3.5vw, 48px);
+}
+
+.experience.is-fullscreen .player-card,
+.experience:fullscreen .player-card {
+    top: 50%;
+    right: 50%;
+    bottom: auto;
+    left: auto;
+    width: min(1040px, calc(100vw - 64px));
+    max-width: 1040px;
+    max-height: calc(100dvh - 72px);
+    padding: clamp(20px, 2.3vw, 30px);
+    gap: clamp(13px, 1.5vh, 20px);
+    transform: translate(50%, -50%);
+    overflow: auto;
+    animation: fullscreenCardIn .38s ease both;
+}
+
+@keyframes fullscreenCardIn {
+    from { opacity: 0; transform: translate(50%, -48%) scale(.985); }
+    to   { opacity: 1; transform: translate(50%, -50%) scale(1); }
+}
+
+/* Distribución panorámica: se aprovecha el ancho en PC y móviles apaisados. */
+@media (min-width: 761px) {
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr);
+        grid-template-areas:
+            "header header"
+            "visual track"
+            "visual lyrics"
+            "visual visualizer"
+            "visual playback"
+            "visual controls"
+            "visual footer";
+        align-content: center;
+        align-items: center;
+        column-gap: clamp(22px, 3vw, 38px);
+        row-gap: clamp(12px, 1.7vh, 19px);
+    }
+
+    .experience.is-fullscreen .player-header,
+    .experience:fullscreen .player-header { grid-area: header; }
+
+    .experience.is-fullscreen .player-visual,
+    .experience:fullscreen .player-visual {
+        grid-area: visual;
+        width: 100%;
+        min-height: 0;
+        height: clamp(300px, 55vh, 560px);
+        max-height: 62vh;
+    }
+
+    .experience.is-fullscreen .track-information,
+    .experience:fullscreen .track-information { grid-area: track; width: 100%; }
+
+    .experience.is-fullscreen .lyrics-container,
+    .experience:fullscreen .lyrics-container { grid-area: lyrics; width: 100%; }
+
+    .experience.is-fullscreen .visualizer-section,
+    .experience:fullscreen .visualizer-section { grid-area: visualizer; width: 100%; }
+
+    .experience.is-fullscreen .playback-section,
+    .experience:fullscreen .playback-section { grid-area: playback; width: 100%; }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls { grid-area: controls; width: 100%; }
+
+    .experience.is-fullscreen .player-footer,
+    .experience:fullscreen .player-footer { grid-area: footer; width: 100%; }
+
+    .experience.is-fullscreen .lyrics-display,
+    .experience:fullscreen .lyrics-display {
+        min-height: clamp(54px, 8vh, 82px);
+    }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls {
+        justify-content: center;
+        gap: clamp(24px, 4vw, 46px);
+    }
+}
+
+/* En móvil vertical: se mantiene la composición completa, pero se adapta al alto. */
+@media (max-width: 760px) {
+    .player-header-actions { gap: 7px; }
+
+    .fullscreen-toggle {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+        border-radius: 11px;
+    }
+
+    .experience.is-fullscreen,
+    .experience:fullscreen {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100dvh;
+        padding:
+            env(safe-area-inset-top)
+            env(safe-area-inset-right)
+            env(safe-area-inset-bottom)
+            env(safe-area-inset-left);
+    }
+
+    .experience.is-fullscreen .ambient-interface,
+    .experience:fullscreen .ambient-interface {
+        top: max(10px, env(safe-area-inset-top));
+        left: 15px;
+        right: 15px;
+    }
+
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        top: auto;
+        right: 50%;
+        bottom: max(10px, env(safe-area-inset-bottom));
+        left: auto;
+        width: min(620px, calc(100vw - 24px));
+        max-height: calc(100dvh - 62px - env(safe-area-inset-top));
+        padding: clamp(13px, 2.5vw, 21px);
+        gap: clamp(9px, 1.7vh, 14px);
+        border-radius: 23px;
+        transform: translateX(50%);
+        overflow-y: auto;
+        animation: none;
+    }
+
+    .experience.is-fullscreen .player-visual,
+    .experience:fullscreen .player-visual {
+        min-height: clamp(115px, 23dvh, 190px);
+        max-height: 25dvh;
+    }
+
+    .experience.is-fullscreen .lyrics-display,
+    .experience:fullscreen .lyrics-display {
+        min-height: 48px;
+    }
+
+    .experience.is-fullscreen .lyrics-container,
+    .experience:fullscreen .lyrics-container {
+        padding: 10px 12px;
+    }
+
+    .experience.is-fullscreen .visualizer-section,
+    .experience:fullscreen .visualizer-section {
+        margin-top: -2px;
+    }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls {
+        gap: clamp(22px, 7vw, 34px);
+    }
+}
+
+/* En un teléfono apaisado, el reproductor pasa a la composición de dos columnas. */
+@media (max-width: 900px) and (max-height: 600px) and (orientation: landscape) {
+    .experience.is-fullscreen .ambient-interface,
+    .experience:fullscreen .ambient-interface {
+        display: none;
+    }
+
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        top: 50%;
+        right: 50%;
+        bottom: auto;
+        width: min(960px, calc(100vw - 24px));
+        max-height: calc(100dvh - 18px);
+        padding: 12px 16px;
+        gap: 7px;
+        border-radius: 18px;
+        transform: translate(50%, -50%);
+        display: grid;
+        grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+        grid-template-areas:
+            "header header"
+            "visual track"
+            "visual lyrics"
+            "visual visualizer"
+            "visual playback"
+            "visual controls"
+            "visual footer";
+        align-content: center;
+        align-items: center;
+        column-gap: 20px;
+        row-gap: 6px;
+        overflow-y: auto;
+    }
+
+    .experience.is-fullscreen .player-header,
+    .experience:fullscreen .player-header { grid-area: header; }
+
+    .experience.is-fullscreen .player-visual,
+    .experience:fullscreen .player-visual {
+        grid-area: visual;
+        height: min(55dvh, 330px);
+        min-height: 0;
+        max-height: 55dvh;
+    }
+
+    .experience.is-fullscreen .track-information,
+    .experience:fullscreen .track-information { grid-area: track; }
+
+    .experience.is-fullscreen .lyrics-container,
+    .experience:fullscreen .lyrics-container { grid-area: lyrics; }
+
+    .experience.is-fullscreen .visualizer-section,
+    .experience:fullscreen .visualizer-section { grid-area: visualizer; }
+
+    .experience.is-fullscreen .playback-section,
+    .experience:fullscreen .playback-section { grid-area: playback; }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls { grid-area: controls; }
+
+    .experience.is-fullscreen .player-footer,
+    .experience:fullscreen .player-footer { grid-area: footer; }
+
+    .experience.is-fullscreen .track-text h1,
+    .experience:fullscreen .track-text h1 { font-size: clamp(18px, 3.2vh, 27px); }
+
+    .experience.is-fullscreen .lyrics-display,
+    .experience:fullscreen .lyrics-display { min-height: 38px; }
+
+    .experience.is-fullscreen .lyrics-container,
+    .experience:fullscreen .lyrics-container { padding: 7px 10px; }
+
+    .experience.is-fullscreen .play-button,
+    .experience:fullscreen .play-button {
+        width: 43px;
+        height: 43px;
+        border-radius: 14px;
+    }
+
+    .experience.is-fullscreen .secondary-control,
+    .experience:fullscreen .secondary-control {
+        width: 33px;
+        height: 33px;
+    }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls { gap: 20px; }
+
+    .experience.is-fullscreen .player-footer,
+    .experience:fullscreen .player-footer { min-height: 20px; }
+}
+
+/* En pantallas de escritorio bajas se compacta sin recortar controles. */
+@media (min-width: 761px) and (max-height: 700px) {
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        max-height: calc(100dvh - 24px);
+        padding: 14px 20px;
+        row-gap: 8px;
+    }
+
+    .experience.is-fullscreen .player-visual,
+    .experience:fullscreen .player-visual {
+        height: 48vh;
+        max-height: 48vh;
+    }
+
+    .experience.is-fullscreen .lyrics-display,
+    .experience:fullscreen .lyrics-display { min-height: 42px; }
+}
+
+/* Estado visual del botón: cambia el icono al maximizar. */
+.experience.is-fullscreen .fullscreen-toggle .fullscreen-enter-icon,
+.experience:fullscreen .fullscreen-toggle .fullscreen-enter-icon {
+    display: none;
+}
+
+.experience.is-fullscreen .fullscreen-toggle .fullscreen-exit-icon,
+.experience:fullscreen .fullscreen-toggle .fullscreen-exit-icon {
+    display: block;
+}
+
+/* El modo fallback también ocupa la ventana en navegadores sin Fullscreen API. */
+.experience.is-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+/* Reduce movimiento si el usuario así lo ha indicado en su dispositivo. */
+@media (prefers-reduced-motion: reduce) {
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        animation: none !important;
+    }
+}
+
+
+/* ============================================================
+   ONEWAY — MOBILE LANDSCAPE GUIDANCE + PERFORMANCE
+   Solo afecta teléfonos; el diseño fullscreen de PC permanece intacto.
+============================================================ */
+@media (max-width: 760px) {
+    .experience.is-fullscreen .background-video,
+    .experience:fullscreen .background-video {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    .experience.is-fullscreen .background-container::before,
+    .experience:fullscreen .background-container::before {
+        display: none !important;
+    }
+
+    /* Evita animaciones decorativas continuas mientras el móvil está maximizado. */
+    .experience.is-fullscreen .ambient-interface,
+    .experience.is-fullscreen .player-card::before,
+    .experience.is-fullscreen .player-card::after,
+    .experience.is-fullscreen .visualizer-container::before,
+    .experience:fullscreen .ambient-interface,
+    .experience:fullscreen .player-card::before,
+    .experience:fullscreen .player-card::after,
+    .experience:fullscreen .visualizer-container::before {
+        animation: none !important;
+    }
+
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        box-shadow: 0 12px 38px rgba(0, 0, 0, .28) !important;
+        scroll-behavior: auto;
+        overscroll-behavior: contain;
+    }
+
+    .experience.is-fullscreen .music-video,
+    .experience:fullscreen .music-video {
+        transform: none !important;
+        filter: none !important;
+    }
+
+    .orientation-hint {
+        position: absolute;
+        inset: 0;
+        z-index: 10020;
+        display: none;
+        place-items: center;
+        padding: 24px;
+        background: rgba(5, 6, 15, .88);
+        color: #fff;
+        text-align: center;
+    }
+
+    .orientation-hint.is-visible {
+        display: grid;
+    }
+
+    .orientation-hint-panel {
+        display: flex;
+        width: min(330px, 100%);
+        flex-direction: column;
+        align-items: center;
+        gap: 13px;
+        padding: 27px 23px 22px;
+        border: 1px solid rgba(190, 173, 255, .22);
+        border-radius: 24px;
+        background: linear-gradient(145deg, rgba(34, 29, 55, .96), rgba(13, 13, 28, .98));
+        box-shadow: 0 18px 55px rgba(0, 0, 0, .38);
+    }
+
+    .orientation-hint-icon {
+        display: grid;
+        width: 62px;
+        height: 62px;
+        place-items: center;
+        border: 1px solid rgba(196, 165, 255, .35);
+        border-radius: 18px;
+        color: #d9c7ff;
+        background: rgba(167, 139, 250, .12);
+        font-size: 39px;
+        line-height: 1;
+    }
+
+    .orientation-hint-panel strong {
+        font-family: Manrope, sans-serif;
+        font-size: 19px;
+        font-weight: 700;
+    }
+
+    .orientation-hint-panel span {
+        max-width: 260px;
+        color: rgba(238, 234, 249, .74);
+        font: 400 13px/1.6 'DM Sans', sans-serif;
+    }
+
+    .orientation-hint-dismiss {
+        margin-top: 5px;
+        padding: 10px 15px;
+        border: 1px solid rgba(220, 210, 255, .2);
+        border-radius: 11px;
+        color: rgba(255, 255, 255, .82);
+        background: rgba(255, 255, 255, .07);
+        font: 600 11px 'DM Sans', sans-serif;
+    }
+}
+
+@media (max-width: 760px) and (orientation: landscape) {
+    .orientation-hint { display: none !important; }
 }
