@@ -1995,6 +1995,8 @@ function ensureOrientationHint() {
 }
 
 function refreshOrientationHint() {
+    // Mensaje de orientación desactivado.
+}
     if (!experienceRoot) return;
 
     const shouldPrompt =
