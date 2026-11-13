@@ -1,660 +1,2760 @@
 
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="theme-color" content="#090810">
-
-    <meta name="description" content=" - Cinematic Music Experience">
-
-    <title> | Music Experience</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
-
-</head>
-
-
-<body>
-
-
-    <!-- =====================================================
-       BACKGROUND VIDEO
-   ====================================================== -->
-
-<main class="experience" id="experience">
-
-    <div class="background-container">
-
-        <video
-            id="backgroundVideo"
-            class="background-video"
-            muted
-            playsinline
-            preload="metadata"
-            disablepictureinpicture
-        >
-
-            <source src="https://res.cloudinary.com/d2xvi4sx/video/upload/v1794538772/videodefondo.mp4" type="video/mp4">
-
-        </video>
-
-    </div>
-
-    <!-- ATMOSPHERIC OVERLAYS -->
-
-    <div class="background-overlay"></div>
-
-    <div class="background-vignette"></div>
-
-    <div class="background-grain"></div>
-
-        <!-- =================================================
-             AMBIENT INTERFACE
-        ================================================== -->
-
-        <div class="ambient-interface">
-
-            <div class="ambient-brand">
-
-                <span class="brand-symbol">𝘒</span>
-
-                <span class="brand-name">
-
-
-
-
-
-
-
-
-
-
-
-
-飛行手紙 (Letterplane) feat. 重音テト</span>
-
-            </div>
-
-
-            <div class="ambient-indicator">
-
-                <span class="ambient-indicator-dot"></span>
-
-                <span>IMMERSIVE AUDIO</span>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             MAIN MUSIC PLAYER
-        ================================================== -->
-
-        <section
-            class="player-card"
-            id="playerCard"
-            aria-label="Reproductor musical"
-        >
-
-
-            <!-- PLAYER HEADER -->
-
-            <header class="player-header">
-
-                <div class="player-header-left">
-
-                    <span class="player-header-indicator"></span>
-
-                    <span class="player-header-label">
-                        Kasane Teto
-                    </span>
-
-                </div>
-
-
-                <button
-                    class="lyrics-toggle"
-                    id="lyricsToggle"
-                    type="button"
-                    aria-label="Ocultar letras"
-                    title="Mostrar u ocultar letras"
-                >
-
-                    <svg viewBox="0 0 24 24" fill="none">
-
-                        <path
-                            d="M4 6H20M4 12H20M4 18H14"
-                            stroke="currentColor"
-                            stroke-width="1.7"
-                            stroke-linecap="round"
-                        />
-
-                    </svg>
-
-                </button>
-
-            </header>
-
-
-
-            <!-- =================================================
-                 SECONDARY VIDEO
-            ================================================== -->
-
-            <div class="player-visual">
-
-                <video
-                    id="musicVideo"
-                    class="music-video"
-                    muted
-                    loop
-                    playsinline
-                    autoplay
-                    preload="auto"
-                    disablepictureinpicture
-                >
-
-                    <source src="tettorecuadro.mp4" type="video/mp4">
-
-                </video>
-
-
-                <div class="visual-overlay"></div>
-
-
-                <!-- VISUAL VIDEO DETAILS -->
-
-                <div class="visual-top-label">
-
-                    <span class="visual-live-dot"></span>
-
-                    <span>VISUAL</span>
-
-                </div>
-
-
-                <div class="visual-bottom">
-
-                    <div class="visual-equalizer" aria-hidden="true">
-
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-
-                    </div>
-
-                    <span class="visual-bottom-text">
-                        
-                    </span>
-
-                </div>
-
-
-                <!-- PLAYBACK INDICATOR -->
-
-                <div
-                    class="visual-play-indicator"
-                    id="visualPlayIndicator"
-                    aria-hidden="true"
-                >
-
-                    <div class="visual-play-icon">
-
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-
-                            <path d="M8 5.5V18.5L19 12L8 5.5Z"/>
-
-                        </svg>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =================================================
-                 TRACK INFORMATION
-            ================================================== -->
-
-            <div class="track-information">
-
-                <div class="track-main">
-
-                    <div class="track-text">
-
-                        <h1 id="trackTitle">
-                            TETO
-                        </h1>
-
-                        <p id="trackArtist">
-                            𝓑𝔂 𝓡
-                        </p>
-
-                    </div>
-
-
-                    <div class="track-decoration">
-
-                        <svg viewBox="0 0 24 24" fill="none">
-
-                            <path
-                                d="M12 3L14.4 9.6L21 12L14.4 14.4L12 21L9.6 14.4L3 12L9.6 9.6L12 3Z"
-                                stroke="currentColor"
-                                stroke-width="1.3"
-                                stroke-linejoin="round"
-                            />
-
-                        </svg>
-
-                    </div>
-
-                </div>
-
-
-                <div class="track-subinformation">
-
-                    <span class="track-subtitle">
-                        
-                    </span>
-
-                    <span class="track-quality">
-                        
-                    </span>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =================================================
-                 LYRICS DISPLAY
-            ================================================== -->
-
-            <section
-                class="lyrics-container"
-                id="lyricsContainer"
-                aria-label="Letras sincronizadas"
-            >
-
-                <div class="lyrics-heading">
-
-                    <span class="lyrics-heading-title">
-                        LYRICS
-                    </span>
-
-                    <span
-                        class="lyrics-status"
-                        id="lyricsStatus"
-                    >
-                        LOADING LYRICS
-                    </span>
-
-                </div>
-
-
-                <div
-                    class="lyrics-display"
-                    id="lyricsDisplay"
-                    aria-live="off"
-                >
-
-                    <p
-                        class="lyric-line previous-lyric"
-                        id="previousLyric"
-                    ></p>
-
-
-                    <p
-                        class="lyric-line current-lyric"
-                        id="currentLyric"
-                    >
-                        ♪
-                    </p>
-
-
-                    <p
-                        class="lyric-line next-lyric"
-                        id="nextLyric"
-                    ></p>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 AUDIO VISUALIZER
-            ================================================== -->
-
-            <div class="visualizer-section">
-
-                <div class="visualizer-header">
-
-                    <span class="visualizer-label">
-                        
-                    </span>
-
-                    <span
-                        class="visualizer-state"
-                        id="visualizerState"
-                    >
-                        
-                    </span>
-
-                </div>
-
-
-                <div class="visualizer-container">
-
-                    <canvas
-                        id="audioVisualizer"
-                        class="audio-visualizer"
-                        aria-label="Visualizador de frecuencias de audio"
-                    ></canvas>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =================================================
-                 PROGRESS BAR
-            ================================================== -->
-
-            <div class="playback-section">
-
-
-                <div
-                    class="progress-track"
-                    id="progressTrack"
-                    role="slider"
-                    tabindex="0"
-                    aria-label="Posición de reproducción"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="0"
-                >
-
-                    <div
-                        class="progress-fill"
-                        id="progressFill"
-                    ></div>
-
-                    <div
-                        class="progress-thumb"
-                        id="progressThumb"
-                    ></div>
-
-                </div>
-
-
-                <div class="time-information">
-
-                    <span id="currentTime">
-                        00:00
-                    </span>
-
-                    <span id="duration">
-                        00:00
-                    </span>
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- =================================================
-                 PLAYBACK CONTROLS
-            ================================================== -->
-
-            <div class="player-controls">
-
-
-                <!-- PREVIOUS / BACKWARD -->
-
-                <button
-                    class="secondary-control"
-                    id="backwardButton"
-                    type="button"
-                    aria-label="Retroceder 10 segundos"
-                    title="Retroceder 10 segundos"
-                >
-
-                    <svg viewBox="0 0 24 24" fill="none">
-
-                        <path
-                            d="M11 5L3 12L11 19V5Z"
-                            fill="currentColor"
-                        />
-
-                        <path
-                            d="M20 5L12 12L20 19V5Z"
-                            fill="currentColor"
-                        />
-
-                    </svg>
-
-                    <span class="control-time">
-                        10
-                    </span>
-
-                </button>
-
-
-
-                <!-- MAIN PLAY BUTTON -->
-
-                <button
-                    class="play-button"
-                    id="playButton"
-                    type="button"
-                    aria-label="Reproducir"
-                    title="Reproducir"
-                >
-
-                    <svg
-                        id="playIcon"
-                        class="play-icon"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
-
-                        <path d="M8 5.5V18.5L19 12L8 5.5Z"/>
-
-                    </svg>
-
-
-                    <svg
-                        id="pauseIcon"
-                        class="pause-icon"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
-
-                        <rect
-                            x="6"
-                            y="5"
-                            width="4"
-                            height="14"
-                            rx="1"
-                        />
-
-                        <rect
-                            x="14"
-                            y="5"
-                            width="4"
-                            height="14"
-                            rx="1"
-                        />
-
-                    </svg>
-
-                </button>
-
-
-
-                <!-- FORWARD -->
-
-                <button
-                    class="secondary-control"
-                    id="forwardButton"
-                    type="button"
-                    aria-label="Adelantar 10 segundos"
-                    title="Adelantar 10 segundos"
-                >
-
-                    <svg viewBox="0 0 24 24" fill="none">
-
-                        <path
-                            d="M13 5L21 12L13 19V5Z"
-                            fill="currentColor"
-                        />
-
-                        <path
-                            d="M4 5L12 12L4 19V5Z"
-                            fill="currentColor"
-                        />
-
-                    </svg>
-
-                    <span class="control-time">
-                        10
-                    </span>
-
-                </button>
-
-
-            </div>
-
-
-
-            <!-- =================================================
-                 VOLUME AND PLAYER FOOTER
-            ================================================== -->
-
-            <footer class="player-footer">
-
-
-                <div class="volume-control">
-
-                    <button
-                        class="mute-button"
-                        id="muteButton"
-                        type="button"
-                        aria-label="Silenciar"
-                        title="Silenciar"
-                    >
-
-                        <svg viewBox="0 0 24 24" fill="none">
-
-                            <path
-                                d="M4 10V14H8L13 18V6L8 10H4Z"
-                                stroke="currentColor"
-                                stroke-width="1.7"
-                                stroke-linejoin="round"
-                            />
-
-                            <path
-                                d="M17 9C18.5 10.5 18.5 13.5 17 15"
-                                stroke="currentColor"
-                                stroke-width="1.7"
-                                stroke-linecap="round"
-                            />
-
-                            <path
-                                d="M19 6C22 9 22 15 19 18"
-                                stroke="currentColor"
-                                stroke-width="1.7"
-                                stroke-linecap="round"
-                            />
-
-                        </svg>
-
-                    </button>
-
-
-                    <input
-                        type="range"
-                        id="volumeSlider"
-                        class="volume-slider"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value="0.8"
-                        aria-label="Volumen"
-                    />
-
-                </div>
-
-
-                <div class="playback-status">
-
-                    <span
-                        class="playback-status-dot"
-                        id="playbackStatusDot"
-                    ></span>
-
-                    <span id="playbackStatus">
-                        READY TO PLAY
-                    </span>
-
-                </div>
-
-
-            </footer>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             AUDIO ELEMENT
-        ================================================== -->
-
-        <audio
-            id="audioPlayer"
-            preload="metadata"
-        >
-
-            <source src="musicatetto.mp3" type="audio/mpeg">
-
-        </audio>
-
-
-    </main>
-
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
-    <script src="script.js" defer></script>
-
-
-</body>
-
-</html>
+/* ============================================================
+   ONEWAY — CINEMATIC MUSIC EXPERIENCE
+   AURORA GLASS / INTERIOR REDESIGN
+   ============================================================ */
+
+:root {
+    color-scheme: dark;
+
+    --bg: #070711;
+    --white: #fbf9ff;
+    --muted: #aaa4bf;
+    --subtle: #77718f;
+
+    --purple: #a78bfa;
+    --purple-bright: #d9c1ff;
+    --violet: #8058ed;
+    --cyan: #72e9f7;
+    --pink: #ed9aff;
+    --blue: #819cff;
+
+    --glass: rgba(17, 14, 31, .54);
+    --glass-light: rgba(255, 255, 255, .075);
+
+    --border: rgba(226, 210, 255, .19);
+    --border-soft: rgba(255, 255, 255, .09);
+
+    --radius-xl: 29px;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+
+    --ease: cubic-bezier(.2, .75, .25, 1);
+
+    --aurora: linear-gradient(
+        110deg,
+        #a78bfa,
+        #ed9aff,
+        #72e9f7,
+        #a78bfa
+    );
+
+    --shadow:
+        0 35px 100px rgba(0, 0, 0, .48),
+        0 0 70px rgba(132, 91, 237, .13);
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--bg);
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    color: var(--white);
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    color: inherit;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+/* ============================================================
+   MAIN EXPERIENCE
+   ============================================================ */
+
+.experience {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: hidden;
+    background: #080711;
+}
+
+/* ============================================================
+   BACKGROUND VIDEO
+   ============================================================ */
+
+.background-container {
+    position: absolute;
+    inset: 0;
+    z-index: -5;
+    overflow: hidden;
+    background: #080711;
+}
+
+.background-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+    filter:
+        saturate(1.18)
+        contrast(1.07)
+        brightness(.91);
+
+    transform: scale(1.025);
+    animation: backgroundBreathe 24s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundBreathe {
+    from { transform: scale(1.025); }
+    to { transform: scale(1.075); }
+}
+
+.background-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -4;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5, 4, 13, .03),
+            rgba(5, 4, 13, .08) 45%,
+            rgba(5, 4, 13, .34)
+        ),
+        linear-gradient(
+            0deg,
+            rgba(5, 4, 13, .42),
+            transparent 52%,
+            rgba(5, 4, 13, .12)
+        );
+}
+
+.background-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at 75% 45%,
+            transparent 20%,
+            rgba(5, 4, 13, .20) 75%,
+            rgba(5, 4, 13, .48)
+        );
+}
+
+.background-grain {
+    position: absolute;
+    inset: -50%;
+    z-index: -2;
+    pointer-events: none;
+    opacity: .065;
+
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+
+    animation: grainDrift 9s steps(5) infinite;
+}
+
+@keyframes grainDrift {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(2%, -1%); }
+    50% { transform: translate(-1%, 2%); }
+    75% { transform: translate(1%, 1%); }
+    100% { transform: translate(0, 0); }
+}
+
+/* ============================================================
+   AMBIENT INTERFACE
+   ============================================================ */
+
+.ambient-interface {
+    position: absolute;
+    top: 34px;
+    left: 43px;
+    right: 43px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.ambient-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-symbol {
+    position: relative;
+    display: grid;
+    place-items: center;
+
+    width: 37px;
+    height: 37px;
+
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 12px;
+
+    color: white;
+    background: rgba(255, 255, 255, .09);
+
+    font-family: 'Manrope', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    box-shadow:
+        0 5px 25px rgba(0, 0, 0, .15),
+        inset 0 1px 0 rgba(255, 255, 255, .13);
+
+    animation: brandFloat 5s ease-in-out infinite;
+}
+
+.brand-symbol::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border: 1px solid rgba(196, 165, 255, .25);
+    border-radius: 15px;
+    opacity: 0;
+    animation: brandPulse 3s ease-out infinite;
+}
+
+@keyframes brandFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes brandPulse {
+    0% { transform: scale(.9); opacity: .6; }
+    100% { transform: scale(1.35); opacity: 0; }
+}
+
+.brand-name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .29em;
+    color: rgba(255, 255, 255, .91);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, .3);
+}
+
+.ambient-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .2em;
+    color: rgba(255, 255, 255, .76);
+}
+
+.ambient-indicator-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 8px var(--cyan),
+        0 0 20px rgba(103, 232, 249, .55);
+
+    animation: indicatorPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes indicatorPulse {
+    0%, 100% { opacity: .65; box-shadow: 0 0 7px var(--cyan); }
+    50% { opacity: 1; box-shadow: 0 0 15px var(--cyan), 0 0 28px rgba(103, 232, 249, .5); }
+}
+
+/* ============================================================
+   PLAYER CARD
+   Tamaño y transparencia conservados
+   ============================================================ */
+
+.player-card {
+    position: fixed;
+    z-index: 10;
+    isolation: isolate;
+
+    top: 50%;
+    right: 40px;
+    left: auto;
+
+    width: min(445px, calc(100vw - 48px));
+    max-height: calc(100dvh - 58px);
+
+    padding: 23px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    border: 1px solid rgba(233, 220, 255, .25);
+    border-radius: var(--radius-xl);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(39, 29, 62, .63),
+            rgba(14, 12, 29, .54) 48%,
+            rgba(25, 17, 44, .64)
+        );
+
+    backdrop-filter: blur(38px) saturate(155%);
+    -webkit-backdrop-filter: blur(38px) saturate(155%);
+
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, .46),
+        0 0 70px rgba(139, 92, 246, .15),
+        inset 0 1px 0 rgba(255, 255, 255, .17);
+
+    transform: translateY(-50%);
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(167, 139, 250, .4) transparent;
+
+    animation: playerEntrance .9s var(--ease) both;
+}
+
+.player-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at 0% 0%,
+            rgba(196, 165, 255, .22),
+            transparent 46%
+        ),
+        radial-gradient(
+            ellipse at 100% 100%,
+            rgba(103, 232, 249, .12),
+            transparent 44%
+        ),
+        linear-gradient(
+            120deg,
+            rgba(255, 255, 255, .075),
+            transparent 35%
+        );
+}
+
+.player-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    z-index: 2;
+    width: 76%;
+    height: 1px;
+    pointer-events: none;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(239, 226, 255, .85),
+        transparent
+    );
+
+    box-shadow: 0 0 12px rgba(196, 165, 255, .35);
+}
+
+.player-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes playerEntrance {
+    from {
+        opacity: 0;
+        transform: translate(28px, -47%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0, -50%);
+    }
+}
+
+.player-card::-webkit-scrollbar {
+    width: 4px;
+}
+
+.player-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.player-card::-webkit-scrollbar-thumb {
+    background: rgba(167, 139, 250, .4);
+    border-radius: 10px;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.player-header {
+    min-height: 29px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-header-indicator {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--purple-bright);
+
+    box-shadow:
+        0 0 10px var(--purple),
+        0 0 20px rgba(196, 165, 255, .55);
+
+    animation: headerGlow 2.5s ease-in-out infinite;
+}
+
+.player-header-indicator::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border: 1px solid rgba(196, 165, 255, .5);
+    border-radius: 50%;
+    animation: headerRing 2s ease-out infinite;
+}
+
+@keyframes headerGlow {
+    50% { filter: brightness(1.6); }
+}
+
+@keyframes headerRing {
+    from { transform: scale(.6); opacity: .8; }
+    to { transform: scale(1.8); opacity: 0; }
+}
+
+.player-header-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .22em;
+    color: #e8dcff;
+}
+
+.lyrics-toggle {
+    position: relative;
+    display: grid;
+    place-items: center;
+
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 12px;
+
+    color: #e0ccff;
+    background: rgba(255, 255, 255, .075);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        transform .25s var(--ease),
+        box-shadow .25s ease;
+}
+
+.lyrics-toggle svg {
+    width: 17px;
+    height: 17px;
+    transition: transform .35s var(--ease), filter .3s ease;
+}
+
+.lyrics-toggle:hover {
+    background: rgba(167, 139, 250, .23);
+    border-color: rgba(196, 165, 255, .5);
+    box-shadow: 0 0 20px rgba(167, 139, 250, .14);
+    transform: translateY(-2px);
+}
+
+.lyrics-toggle:hover svg {
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 5px var(--purple-bright));
+}
+
+.lyrics-toggle:active {
+    transform: scale(.93);
+}
+
+/* ============================================================
+   MUSIC VIDEO
+   ============================================================ */
+
+.player-visual {
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 4 / 3;
+    min-height: 215px;
+    max-height: 315px;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 20px;
+
+    background: #171326;
+
+    box-shadow:
+        0 18px 48px rgba(0, 0, 0, .35),
+        0 0 30px rgba(139, 92, 246, .11),
+        inset 0 1px 0 rgba(255, 255, 255, .14);
+}
+
+.player-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: inherit;
+
+    background: linear-gradient(
+        135deg,
+        rgba(196, 165, 255, .17),
+        transparent 28%,
+        transparent 70%,
+        rgba(103, 232, 249, .12)
+    );
+
+    opacity: .65;
+    transition: opacity .5s ease;
+}
+
+.player-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, .075);
+    border-radius: inherit;
+}
+
+.music-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transform: scale(1.015);
+    filter: saturate(1.12) contrast(1.04);
+
+    transition:
+        transform 1.2s var(--ease),
+        filter .8s ease;
+}
+
+.player-visual:hover .music-video {
+    transform: scale(1.06);
+    filter: saturate(1.25) contrast(1.07);
+}
+
+.player-card.is-playing .music-video {
+    animation: videoBreathing 9s ease-in-out infinite alternate;
+}
+
+@keyframes videoBreathing {
+    from { transform: scale(1.015); }
+    to { transform: scale(1.055); }
+}
+
+.visual-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(7, 6, 17, .38),
+            transparent 30%,
+            transparent 60%,
+            rgba(7, 6, 17, .72)
+        ),
+        linear-gradient(
+            90deg,
+            rgba(10, 8, 20, .12),
+            transparent 45%,
+            rgba(10, 8, 20, .12)
+        );
+}
+
+.visual-top-label {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 3;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 11px;
+
+    border: 1px solid rgba(255, 255, 255, .19);
+    border-radius: 9px;
+
+    background: rgba(8, 7, 17, .42);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .17em;
+    color: rgba(255, 255, 255, .95);
+}
+
+.visual-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 8px var(--cyan),
+        0 0 15px rgba(103, 232, 249, .65);
+
+    animation: livePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% { opacity: .6; transform: scale(.85); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.visual-bottom {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    z-index: 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.visual-equalizer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.visual-equalizer span {
+    position: relative;
+    padding: 7px 10px;
+
+    border: 1px solid rgba(255, 255, 255, .19);
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, .12);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.visual-bottom-text {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .2em;
+    color: rgba(255, 255, 255, .9);
+}
+
+.visual-play-indicator {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+
+    display: grid;
+    place-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    background: rgba(8, 7, 17, .13);
+    transition: opacity .35s ease;
+}
+
+.player-card:not(.is-playing) .visual-play-indicator {
+    opacity: 1;
+}
+
+.visual-play-icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+
+    width: 59px;
+    height: 59px;
+
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 50%;
+
+    color: white;
+    background: rgba(255, 255, 255, .16);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, .2),
+        inset 0 1px 0 rgba(255, 255, 255, .2);
+
+    transition: transform .35s var(--ease), box-shadow .35s ease;
+}
+
+.visual-play-icon::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 50%;
+    animation: visualPlayRing 2.5s ease-out infinite;
+}
+
+@keyframes visualPlayRing {
+    from { transform: scale(.8); opacity: .7; }
+    to { transform: scale(1.35); opacity: 0; }
+}
+
+.player-visual:hover .visual-play-icon {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px rgba(196, 165, 255, .4);
+}
+
+.visual-play-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================================
+   TRACK INFORMATION
+   ============================================================ */
+
+.track-information {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.track-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.track-text {
+    min-width: 0;
+}
+
+.track-text h1 {
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(25px, 3vw, 31px);
+    font-weight: 800;
+    letter-spacing: -.06em;
+    line-height: 1.12;
+
+    color: #fff;
+
+    text-shadow:
+        0 3px 22px rgba(167, 139, 250, .22);
+}
+
+.track-text p {
+    margin-top: 7px;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .17em;
+    color: #c0b7d5;
+}
+
+.track-decoration {
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex: 0 0 42px;
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid rgba(196, 165, 255, .25);
+    border-radius: 14px;
+
+    color: var(--purple-bright);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(167, 139, 250, .2),
+            rgba(103, 232, 249, .08)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .09),
+        0 5px 20px rgba(0, 0, 0, .1);
+
+    transition: transform .4s var(--ease), box-shadow .4s ease;
+}
+
+.track-decoration::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border: 1px solid rgba(196, 165, 255, .18);
+    border-radius: 17px;
+    opacity: 0;
+    transition: opacity .3s ease, transform .3s ease;
+}
+
+.track-decoration svg {
+    width: 20px;
+    height: 20px;
+}
+
+.player-card.is-playing .track-decoration {
+    animation: decorationFloat 4s ease-in-out infinite;
+}
+
+.player-card.is-playing .track-decoration::before {
+    opacity: 1;
+    animation: decorationRing 3s ease-out infinite;
+}
+
+@keyframes decorationFloat {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-3px) rotate(4deg); }
+}
+
+@keyframes decorationRing {
+    from { transform: scale(.9); opacity: .55; }
+    to { transform: scale(1.25); opacity: 0; }
+}
+
+.track-subinformation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 11px;
+    border-top: 1px solid rgba(255, 255, 255, .10);
+}
+
+.track-subtitle,
+.track-quality {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    color: var(--muted);
+}
+
+.track-quality {
+    color: #d1baff;
+}
+
+/* ============================================================
+   LYRICS
+   ============================================================ */
+
+.lyrics-container {
+    position: relative;
+    padding: 16px 16px 15px;
+
+    border: 1px solid rgba(196, 165, 255, .19);
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(167, 139, 250, .14),
+            rgba(255, 255, 255, .035)
+        );
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .07),
+        0 8px 24px rgba(0, 0, 0, .08);
+
+    transition:
+        border-color .4s ease,
+        box-shadow .4s ease,
+        background .4s ease;
+}
+
+.lyrics-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 43px;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        var(--purple-bright),
+        var(--cyan)
+    );
+
+    box-shadow: 0 0 12px rgba(196, 165, 255, .4);
+}
+
+.lyrics-container::after {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -55px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    pointer-events: none;
+
+    background: radial-gradient(
+        circle,
+        rgba(167, 139, 250, .13),
+        transparent 70%
+    );
+
+    animation: lyricAmbient 7s ease-in-out infinite alternate;
+}
+
+@keyframes lyricAmbient {
+    from { transform: translate(0, 0); opacity: .5; }
+    to { transform: translate(-25px, 20px); opacity: 1; }
+}
+
+.lyrics-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.lyrics-heading-title {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .22em;
+    color: #eee4ff;
+}
+
+.lyrics-status {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    color: #b0a4ca;
+}
+
+.lyrics-display {
+    position: relative;
+    min-height: 80px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+
+    overflow: visible;
+}
+
+.lyric-line {
+    min-height: 15px;
+    width: 100%;
+
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+
+    transition:
+        opacity .4s ease,
+        transform .45s var(--ease),
+        color .3s ease;
+}
+
+.previous-lyric,
+.next-lyric {
+    font-size: 10px;
+    color: rgba(205, 193, 230, .47);
+    opacity: .65;
+}
+
+.previous-lyric {
+    transform: translateY(2px);
+}
+
+.next-lyric {
+    transform: translateY(-2px);
+}
+
+.current-lyric {
+    font-size: 14px;
+    line-height: 1.55;
+    font-weight: 750;
+
+    color: #f7edff;
+
+    text-shadow:
+        0 0 18px rgba(167, 139, 250, .35),
+        0 0 35px rgba(167, 139, 250, .12);
+
+    animation: currentLyricGlow 4s ease-in-out infinite;
+}
+
+@keyframes currentLyricGlow {
+    0%, 100% {
+        text-shadow:
+            0 0 12px rgba(167, 139, 250, .2),
+            0 0 25px rgba(167, 139, 250, .08);
+    }
+    50% {
+        text-shadow:
+            0 0 18px rgba(196, 165, 255, .48),
+            0 0 36px rgba(103, 232, 249, .13);
+    }
+}
+
+/* Character-by-character lyric reveal */
+
+.lyric-character {
+    display: inline-block !important;
+    opacity: 0;
+    transform: translateY(9px) scale(.96);
+
+    animation:
+        lyricTyping
+        var(--char-duration, 260ms)
+        cubic-bezier(.2, .75, .25, 1)
+        var(--char-delay, 0ms)
+        both !important;
+
+    will-change: opacity, transform;
+}
+
+@keyframes lyricTyping {
+    0% {
+        opacity: 0;
+        transform: translateY(9px) scale(.96);
+        filter: blur(3px);
+    }
+    70% {
+        opacity: 1;
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* ============================================================
+   AUDIO VISUALIZER
+   ============================================================ */
+
+.visualizer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.visualizer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.visualizer-label,
+.visualizer-state {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .17em;
+    color: #aaa1c1;
+}
+
+.visualizer-state {
+    color: #d0b8ff;
+}
+
+.visualizer-container {
+    position: relative;
+    height: 47px;
+    width: 100%;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(196, 165, 255, .17);
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(167, 139, 250, .09),
+            rgba(103, 232, 249, .07)
+        ),
+        rgba(255, 255, 255, .025);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .07);
+
+    transition: border-color .3s ease, box-shadow .3s ease;
+}
+
+.visualizer-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: linear-gradient(
+        110deg,
+        transparent 20%,
+        rgba(255, 255, 255, .07) 48%,
+        transparent 75%
+    );
+
+    transform: translateX(-100%);
+    animation: visualizerShine 5s ease-in-out infinite;
+}
+
+@keyframes visualizerShine {
+    0%, 35% { transform: translateX(-100%); }
+    75%, 100% { transform: translateX(100%); }
+}
+
+.player-card.is-playing .visualizer-container {
+    border-color: rgba(196, 165, 255, .3);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .08),
+        0 0 18px rgba(139, 92, 246, .12);
+}
+
+.audio-visualizer {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================================
+   PLAYBACK / PROGRESS
+   ============================================================ */
+
+.playback-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.progress-track {
+    position: relative;
+    width: 100%;
+    height: 5px;
+
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .17);
+
+    cursor: pointer;
+    transition: height .2s ease, background .2s ease;
+}
+
+.progress-track::before {
+    content: "";
+    position: absolute;
+    inset: -6px 0;
+    border-radius: 20px;
+}
+
+.progress-track:hover {
+    height: 7px;
+    background: rgba(255, 255, 255, .23);
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: linear-gradient(
+        90deg,
+        #8757ed,
+        #c7a5ff 55%,
+        #70e9f7
+    );
+
+    box-shadow:
+        0 0 12px rgba(167, 139, 250, .48),
+        0 0 22px rgba(103, 232, 249, .13);
+}
+
+.progress-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+
+    width: 12px;
+    height: 12px;
+
+    border: 2px solid white;
+    border-radius: 50%;
+
+    background: var(--purple);
+
+    box-shadow:
+        0 0 12px rgba(167, 139, 250, .7),
+        0 0 22px rgba(103, 232, 249, .18);
+
+    transform: translate(-50%, -50%);
+    opacity: 0;
+
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.progress-track:hover .progress-thumb {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.12);
+}
+
+.time-information {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 9px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: #b5acc9;
+}
+
+/* ============================================================
+   PLAYER CONTROLS
+   ============================================================ */
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    padding: 3px 0;
+}
+
+.secondary-control {
+    position: relative;
+    display: grid;
+    place-items: center;
+
+    width: 44px;
+    height: 44px;
+
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 15px;
+
+    color: #e0d5f2;
+    background: rgba(255, 255, 255, .075);
+
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+
+    transition:
+        transform .25s var(--ease),
+        color .22s ease,
+        background .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+.secondary-control::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+
+    background: linear-gradient(
+        135deg,
+        rgba(196, 165, 255, .18),
+        transparent 65%
+    );
+
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+
+.secondary-control svg {
+    position: relative;
+    z-index: 1;
+    width: 18px;
+    height: 18px;
+    transition: transform .25s var(--ease);
+}
+
+.secondary-control:hover {
+    color: white;
+    background: rgba(167, 139, 250, .23);
+    border-color: rgba(196, 165, 255, .48);
+
+    box-shadow:
+        0 5px 20px rgba(139, 92, 246, .16);
+
+    transform: translateY(-3px);
+}
+
+.secondary-control:hover::before {
+    opacity: 1;
+}
+
+.secondary-control:hover svg {
+    transform: scale(1.12);
+}
+
+.secondary-control:active {
+    transform: scale(.92);
+}
+
+.control-time {
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+
+    font-size: 7px;
+    font-weight: 700;
+    color: #c5b7dc;
+}
+
+.play-button {
+    position: relative;
+    display: grid;
+    place-items: center;
+
+    width: 64px;
+    height: 64px;
+
+    border: 1px solid rgba(255, 255, 255, .58);
+    border-radius: 21px;
+
+    color: #171024;
+
+    background: linear-gradient(
+        145deg,
+        #f0e4ff,
+        #c2a6ff 52%,
+        #9275ee
+    );
+
+    box-shadow:
+        0 10px 30px rgba(139, 92, 246, .38),
+        0 0 24px rgba(196, 165, 255, .18),
+        inset 0 1px 0 rgba(255, 255, 255, .72);
+
+    transition:
+        transform .25s var(--ease),
+        box-shadow .25s ease,
+        filter .25s ease;
+}
+
+.play-button::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+
+    border: 1px solid rgba(196, 165, 255, .32);
+    border-radius: 25px;
+
+    box-shadow: 0 0 20px rgba(167, 139, 250, .08);
+
+    transition:
+        inset .3s ease,
+        opacity .3s ease;
+}
+
+.play-button::after {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border: 1px solid rgba(196, 165, 255, .17);
+    border-radius: 29px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.player-card.is-playing .play-button::after {
+    animation: playPulse 2.8s ease-out infinite;
+}
+
+@keyframes playPulse {
+    0% { transform: scale(.85); opacity: .65; }
+    100% { transform: scale(1.25); opacity: 0; }
+}
+
+.play-button:hover {
+    transform: translateY(-3px) scale(1.04);
+    filter: brightness(1.09);
+
+    box-shadow:
+        0 14px 38px rgba(139, 92, 246, .48),
+        0 0 30px rgba(196, 165, 255, .23);
+}
+
+.play-button:hover::before {
+    inset: -9px;
+    opacity: .65;
+}
+
+.play-button:active {
+    transform: scale(.94);
+}
+
+.play-button svg {
+    width: 24px;
+    height: 24px;
+    transition: transform .25s var(--ease);
+}
+
+.play-button:hover svg {
+    transform: scale(1.08);
+}
+
+.play-button .pause-icon {
+    display: none;
+}
+
+.player-card.is-playing .play-button .play-icon {
+    display: none;
+}
+
+.player-card.is-playing .play-button .pause-icon {
+    display: block;
+}
+
+/* ============================================================
+   FOOTER / VOLUME
+   ============================================================ */
+
+.player-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, .10);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+}
+
+.mute-button {
+    display: grid;
+    place-items: center;
+
+    width: 28px;
+    height: 28px;
+
+    color: #c0b5d5;
+    background: transparent;
+
+    transition: color .2s ease, transform .2s ease;
+}
+
+.mute-button:hover {
+    color: var(--cyan);
+    transform: scale(1.12);
+}
+
+.mute-button svg {
+    width: 17px;
+    height: 17px;
+}
+
+.volume-slider {
+    width: 82px;
+    height: 4px;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        rgba(167, 139, 250, .65),
+        rgba(255, 255, 255, .2)
+    );
+
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+    background: #d1b5ff;
+    border: 2px solid #fff;
+
+    box-shadow:
+        0 0 10px rgba(167, 139, 250, .6),
+        0 0 18px rgba(103, 232, 249, .2);
+
+    transition: transform .2s ease;
+}
+
+.volume-slider:hover::-webkit-slider-thumb {
+    transform: scale(1.25);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+    background: #d1b5ff;
+    border: 2px solid #fff;
+
+    box-shadow: 0 0 10px rgba(167, 139, 250, .6);
+}
+
+.playback-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    color: #b4abc8;
+}
+
+.playback-status-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+    background: #858096;
+    flex-shrink: 0;
+}
+
+.player-card.is-playing .playback-status-dot {
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 9px rgba(103, 232, 249, .9),
+        0 0 17px rgba(103, 232, 249, .4);
+
+    animation: statusPulse 1.7s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { transform: scale(.85); opacity: .7; }
+    50% { transform: scale(1.25); opacity: 1; }
+}
+
+/* ============================================================
+   INTERACTION STATES
+   ============================================================ */
+
+.player-card button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.player-card button:active {
+    transition-duration: .08s;
+}
+
+.player-card button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.player-card button:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+/* ============================================================
+   FALLBACK FOR BROWSERS WITHOUT BACKDROP FILTER
+   ============================================================ */
+
+@supports not (backdrop-filter: blur(1px)) {
+    .player-card {
+        background: rgba(19, 15, 34, .94);
+    }
+
+    .lyrics-container,
+    .secondary-control,
+    .lyrics-toggle {
+        background: rgba(24, 18, 43, .92);
+    }
+}
+
+/* ============================================================
+   LAPTOPS
+   ============================================================ */
+
+@media (min-width: 1200px) {
+    .player-card {
+        right: 42px;
+        width: 445px;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+    .player-card {
+        right: 25px;
+        width: 410px;
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .player-visual {
+        min-height: 190px;
+        max-height: 270px;
+    }
+
+    .ambient-interface {
+        left: 28px;
+        right: 28px;
+    }
+}
+
+/* ============================================================
+   TABLETS
+   ============================================================ */
+
+@media (max-width: 760px) {
+    body {
+        overflow: auto;
+    }
+
+    .experience {
+        min-height: 100dvh;
+        overflow: hidden;
+    }
+
+    .ambient-interface {
+        top: 19px;
+        left: 18px;
+        right: 18px;
+    }
+
+    .brand-name {
+        font-size: 10px;
+    }
+
+    .ambient-indicator {
+        font-size: 8px;
+    }
+
+    .player-card {
+        top: auto;
+        right: 50%;
+        bottom: 17px;
+        left: auto;
+
+        width: min(445px, calc(100vw - 28px));
+        max-height: calc(100dvh - 85px);
+
+        padding: 19px;
+        gap: 15px;
+
+        transform: translateX(50%);
+        animation: mobilePlayerEntrance .7s var(--ease) both;
+    }
+
+    @keyframes mobilePlayerEntrance {
+        from {
+            opacity: 0;
+            transform: translate(50%, 25px);
+        }
+        to {
+            opacity: 1;
+            transform: translate(50%, 0);
+        }
+    }
+
+    .player-visual {
+        min-height: 180px;
+        max-height: 250px;
+    }
+}
+
+/* ============================================================
+   SMALL PHONES
+   ============================================================ */
+
+@media (max-width: 430px) {
+    .player-card {
+        width: calc(100vw - 22px);
+        bottom: 11px;
+        max-height: calc(100dvh - 70px);
+
+        padding: 15px;
+        gap: 13px;
+
+        border-radius: 22px;
+    }
+
+    .player-visual {
+        min-height: 160px;
+        max-height: 215px;
+        border-radius: 16px;
+    }
+
+    .track-text h1 {
+        font-size: 23px;
+    }
+
+    .lyrics-container {
+        padding: 12px;
+    }
+
+    .lyrics-display {
+        min-height: 68px;
+    }
+
+    .player-controls {
+        gap: 23px;
+    }
+
+    .play-button {
+        width: 55px;
+        height: 55px;
+        border-radius: 18px;
+    }
+
+    .secondary-control {
+        width: 39px;
+        height: 39px;
+    }
+
+    .volume-slider {
+        width: 65px;
+    }
+
+    .ambient-indicator {
+        display: none;
+    }
+}
+
+/* ============================================================
+   SHORT SCREENS
+   ============================================================ */
+
+@media (max-height: 760px) and (min-width: 761px) {
+    .player-card {
+        max-height: calc(100dvh - 30px);
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .player-visual {
+        min-height: 155px;
+        max-height: 210px;
+    }
+
+    .lyrics-display {
+        min-height: 55px;
+    }
+
+    .lyrics-container {
+        padding: 10px 13px;
+    }
+
+    .play-button {
+        width: 51px;
+        height: 51px;
+    }
+
+    .secondary-control {
+        width: 37px;
+        height: 37px;
+    }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
+    .lyric-character {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
+
+/* ==========================================
+   ONEWAY — ANIMATED AURORA GLASS
+   ========================================== */
+
+.player-card {
+    background:
+        radial-gradient(
+            ellipse at 15% 5%,
+            rgba(160, 75, 255, .30),
+            transparent 42%
+        ),
+        radial-gradient(
+            ellipse at 95% 35%,
+            rgba(30, 205, 255, .22),
+            transparent 45%
+        ),
+        radial-gradient(
+            ellipse at 40% 110%,
+            rgba(255, 55, 190, .20),
+            transparent 45%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(39, 29, 62, .63),
+            rgba(14, 12, 29, .54) 48%,
+            rgba(25, 17, 44, .64)
+        ) !important;
+
+    background-size: 180% 180%, 180% 180%, 180% 180%, 100% 100%;
+    background-position: 0% 0%, 100% 50%, 50% 100%, center;
+
+    animation: auroraMovement 12s ease-in-out infinite alternate;
+
+    backdrop-filter: blur(38px) saturate(155%);
+    -webkit-backdrop-filter: blur(38px) saturate(155%);
+}
+
+@keyframes auroraMovement {
+    0% {
+        background-position: 0% 0%, 100% 50%, 50% 100%, center;
+    }
+
+    50% {
+        background-position: 80% 40%, 20% 80%, 90% 20%, center;
+    }
+
+    100% {
+        background-position: 30% 100%, 80% 0%, 10% 50%, center;
+    }
+}
+
+/* ==========================================
+   ONEWAY — LIGHT COSMIC BACKGROUND
+   ========================================== */
+
+.background-container {
+    background-color: #080811;
+    isolation: isolate;
+}
+
+.background-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 20% 25%,
+            rgba(125, 65, 255, .17),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(30, 190, 255, .12),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 55% 45%,
+            rgba(220, 65, 190, .07),
+            transparent 40%
+        );
+
+    background-size: 140% 140%;
+    animation: softAurora 22s ease-in-out infinite alternate;
+}
+
+@keyframes softAurora {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 30% 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .background-container::before {
+        animation: none;
+    }
+}
+
+/* ==========================================
+   ONEWAY — LIGHT COSMIC BACKGROUND
+   ========================================== */
+
+.background-container {
+    background-color: #080811;
+    isolation: isolate;
+}
+
+
+
+@keyframes softAurora {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 30% 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .background-container::before {
+        animation: none;
+    }
+}
+
+/* ============================================================
+   ONEWAY — PERFORMANCE OVERRIDES
+   Mantiene clases, estructura, responsive y estados del reproductor.
+   Reduce filtros, desenfoques y animaciones de repintado continuo.
+   ============================================================ */
+
+/* El video de fondo queda en una escala fija: evita el zoom constante. */
+.background-video {
+    filter: none !important;
+    transform: scale(1.025);
+    animation: none !important;
+}
+
+/* El grano SVG con feTurbulence era costoso y se movía todo el tiempo. */
+.background-grain {
+    display: none !important;
+    animation: none !important;
+    background-image: none !important;
+}
+
+/* Mantiene el ambiente de color, pero sin desplazar gradientes cada segundo. */
+.background-container::before {
+    animation: none !important;
+    background-position: 0 0 !important;
+    background-size: 100% 100% !important;
+}
+
+/* Cristal ligero: conserva transparencia y bordes sin desenfoque de pantalla. */
+.brand-symbol,
+.player-card,
+.lyrics-toggle,
+.visual-top-label,
+.visual-equalizer span,
+.track-decoration,
+.lyrics-container,
+.secondary-control {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+}
+
+.player-card {
+    /* El fondo más sólido mantiene legibles los controles sin blur. */
+    background:
+        radial-gradient(ellipse at 15% 5%, rgba(160, 75, 255, .24), transparent 42%),
+        radial-gradient(ellipse at 95% 35%, rgba(30, 205, 255, .16), transparent 45%),
+        radial-gradient(ellipse at 40% 110%, rgba(255, 55, 190, .14), transparent 45%),
+        linear-gradient(145deg, rgba(30, 24, 48, .94), rgba(12, 11, 25, .94) 48%, rgba(24, 18, 40, .94)) !important;
+    background-size: auto !important;
+    background-position: center !important;
+    animation: none !important;
+}
+
+.brand-symbol {
+    background: rgba(24, 20, 39, .82);
+}
+
+.lyrics-toggle,
+.secondary-control,
+.visual-top-label,
+.visual-equalizer span {
+    background-color: rgba(22, 18, 37, .78);
+}
+
+.lyrics-container {
+    background: linear-gradient(135deg, rgba(94, 65, 145, .20), rgba(20, 17, 34, .82));
+}
+
+/* El video interior ya no usa filtros ni zoom animado permanente. */
+.music-video {
+    filter: none !important;
+    transform: none;
+    transition: transform .35s ease;
+}
+
+.player-visual:hover .music-video {
+    filter: none !important;
+    transform: scale(1.025);
+}
+
+.player-card.is-playing .music-video {
+    animation: none !important;
+}
+
+/* Evita filtros de brillo y sombras filtradas en interacciones pequeñas. */
+.headerGlow,
+.player-header-indicator {
+    filter: none !important;
+}
+
+.lyrics-toggle:hover svg {
+    filter: none !important;
+}
+
+.play-button:hover {
+    filter: none !important;
+}
+
+/* El texto de la letra conserva su entrada, sin blur por carácter. */
+.lyric-character {
+    will-change: auto !important;
+}
+
+@keyframes lyricTyping {
+    0% {
+        opacity: 0;
+        transform: translateY(7px) scale(.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animaciones de estado más baratas: opacidad/transform en vez de filtros y glow pulsante. */
+@keyframes headerGlow {
+    0%, 100% { opacity: .82; }
+    50% { opacity: 1; }
+}
+
+@keyframes indicatorPulse {
+    0%, 100% { opacity: .72; }
+    50% { opacity: 1; }
+}
+
+@keyframes livePulse {
+    0%, 100% { opacity: .72; transform: scale(.92); }
+    50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes statusPulse {
+    0%, 100% { transform: scale(.92); opacity: .78; }
+    50% { transform: scale(1.08); opacity: 1; }
+}
+
+/* Reduce animación continua de brillo en el visualizador. */
+.visualizer-container::before {
+    animation: none !important;
+    opacity: .35;
+    transform: none;
+}
+
+/* En equipos con movimiento reducido, se respetan las preferencias del sistema. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* =====================================================
+   LYRICS EXPERIENCE — SPOTIFY STYLE
+   Entrada cinematográfica + escritura progresiva
+   Optimizado: sin blur, filtros ni partículas
+===================================================== */
+
+/* Contenedor de letras */
+#lyricsDisplay {
+    perspective: 700px;
+}
+
+/* Entrada de la frase completa */
+#lyricsDisplay.is-transitioning .current-lyric,
+#lyricsDisplay.is-transitioning #currentLyric {
+    animation: spotifyLyricEntrance 650ms
+        cubic-bezier(.16, 1, .3, 1) both;
+}
+
+/* Entrada de cada carácter */
+#lyricsDisplay .lyric-character {
+    display: inline-block !important;
+    opacity: 0;
+    transform: translate3d(0, 13px, 0) scale(.96);
+
+    animation-name: spotifyCharacterReveal !important;
+    animation-duration: var(--char-duration, 260ms) !important;
+    animation-delay: var(--char-delay, 0ms) !important;
+    animation-timing-function:
+        cubic-bezier(.16, 1, .3, 1) !important;
+    animation-fill-mode: both !important;
+    animation-iteration-count: 1 !important;
+}
+
+/* Aparición suave de la frase */
+@keyframes spotifyLyricEntrance {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 24px, 0) scale(.97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+/* Escritura carácter por carácter */
+@keyframes spotifyCharacterReveal {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 13px, 0) scale(.96);
+    }
+
+    65% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+/* Entrada de las líneas secundarias */
+#lyricsDisplay.is-transitioning .previous-lyric {
+    animation: spotifyPrevious 500ms ease both;
+}
+
+#lyricsDisplay.is-transitioning .next-lyric {
+    animation: spotifyNext 500ms ease both;
+}
+
+@keyframes spotifyPrevious {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: .55;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spotifyNext {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+    to {
+        opacity: .55;
+        transform: translateY(0);
+    }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    #lyricsDisplay .lyric-character,
+    #lyricsDisplay.is-transitioning .current-lyric,
+    #lyricsDisplay.is-transitioning #currentLyric {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+
+/* ============================================================
+   ONEWAY — SPOTIFY-STYLE LYRIC TRANSITIONS
+   Frase que entra, líneas que se superponen y texto carácter a carácter.
+   Requiere que JavaScript cree spans .lyric-character.
+   ============================================================ */
+
+/* El bloque de letras mantiene las líneas apiladas y permite el movimiento. */
+.lyrics-display {
+    perspective: 700px;
+    transform-style: preserve-3d;
+}
+
+/* La frase activa entra desde abajo con una pequeña elevación. */
+.lyrics-display.is-transitioning .current-lyric {
+    animation: onewayLyricCurrentIn 620ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+/* La frase anterior se desplaza hacia arriba mientras pierde presencia. */
+.lyrics-display.is-transitioning .previous-lyric {
+    animation: onewayLyricPreviousOut 520ms cubic-bezier(.2, .7, .2, 1) both;
+}
+
+/* La frase siguiente sube suavemente para ocupar su lugar. */
+.lyrics-display.is-transitioning .next-lyric {
+    animation: onewayLyricNextIn 620ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+@keyframes onewayLyricCurrentIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0) scale(.975);
+    }
+    70% { opacity: 1; }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes onewayLyricPreviousOut {
+    0% {
+        opacity: .65;
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        opacity: .22;
+        transform: translate3d(0, -9px, 0);
+    }
+}
+
+@keyframes onewayLyricNextIn {
+    0% {
+        opacity: .25;
+        transform: translate3d(0, 10px, 0);
+    }
+    100% {
+        opacity: .65;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Cada carácter se revela con un pequeño movimiento ascendente.
+   --char-delay y --char-duration los proporciona JavaScript. */
+.lyrics-display .current-lyric .lyric-character,
+.lyrics-display .lyric-character {
+    display: inline-block !important;
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(.975);
+    animation: onewayCharacterIn
+        var(--char-duration, 260ms)
+        cubic-bezier(.16, 1, .3, 1)
+        var(--char-delay, 0ms)
+        both !important;
+    filter: none !important;
+    will-change: auto;
+}
+
+@keyframes onewayCharacterIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0) scale(.975);
+    }
+    68% { opacity: 1; }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+/* Evita que el brillo infinito original compita con la entrada de la frase. */
+.current-lyric {
+    animation: none;
+}
+
+/* Si el usuario solicita menos movimiento, se muestra el texto sin animación. */
+@media (prefers-reduced-motion: reduce) {
+    .lyrics-display.is-transitioning .current-lyric,
+    .lyrics-display.is-transitioning .previous-lyric,
+    .lyrics-display.is-transitioning .next-lyric,
+    .lyrics-display .lyric-character {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+
+
+
+/* ============================================================
+   ONEWAY — ADAPTIVE DISPLAY + FULLSCREEN / MAXIMIZE
+   No cambia la estructura del reproductor ni sus IDs originales.
+   ============================================================ */
+
+/* Los dos botones del encabezado comparten el mismo grupo. */
+.player-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex: 0 0 auto;
+}
+
+.fullscreen-toggle {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border: 1px solid rgba(226, 210, 255, .17);
+    border-radius: 12px;
+    color: rgba(245, 239, 255, .88);
+    background: rgba(255, 255, 255, .055);
+    transition:
+        background .22s ease,
+        border-color .22s ease,
+        transform .22s ease,
+        color .22s ease;
+}
+
+.fullscreen-toggle svg {
+    width: 17px;
+    height: 17px;
+    display: block;
+}
+
+.fullscreen-toggle .fullscreen-exit-icon {
+    display: none;
+}
+
+.fullscreen-toggle:hover {
+    color: #fff;
+    background: rgba(167, 139, 250, .17);
+    border-color: rgba(196, 165, 255, .48);
+    transform: translateY(-1px);
+}
+
+.fullscreen-toggle:active {
+    transform: scale(.94);
+}
+
+.fullscreen-toggle:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+/* El modo de pantalla completa usa el espacio real disponible. */
+.experience.is-fullscreen,
+.experience:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+    background: #080711;
+}
+
+.experience.is-fullscreen .ambient-interface,
+.experience:fullscreen .ambient-interface {
+    top: clamp(18px, 3.2vh, 34px);
+    left: clamp(20px, 3.5vw, 48px);
+    right: clamp(20px, 3.5vw, 48px);
+}
+
+.experience.is-fullscreen .player-card,
+.experience:fullscreen .player-card {
+    top: 50%;
+    right: 50%;
+    bottom: auto;
+    left: auto;
+    width: min(1040px, calc(100vw - 64px));
+    max-width: 1040px;
+    max-height: calc(100dvh - 72px);
+    padding: clamp(20px, 2.3vw, 30px);
+    gap: clamp(13px, 1.5vh, 20px);
+    transform: translate(50%, -50%);
+    overflow: auto;
+    animation: fullscreenCardIn .38s ease both;
+}
+
+@keyframes fullscreenCardIn {
+    from { opacity: 0; transform: translate(50%, -48%) scale(.985); }
+    to   { opacity: 1; transform: translate(50%, -50%) scale(1); }
+}
+
+/* Distribución panorámica: se aprovecha el ancho en PC y móviles apaisados. */
+@media (min-width: 761px) {
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr);
+        grid-template-areas:
+            "header header"
+            "visual track"
+            "visual lyrics"
+            "visual visualizer"
+            "visual playback"
+            "visual controls"
+            "visual footer";
+        align-content: center;
+        align-items: center;
+        column-gap: clamp(22px, 3vw, 38px);
+        row-gap: clamp(12px, 1.7vh, 19px);
+    }
+
+    .experience.is-fullscreen .player-header,
+    .experience:fullscreen .player-header { grid-area: header; }
+
+    .experience.is-fullscreen .player-visual,
+    .experience:fullscreen .player-visual {
+        grid-area: visual;
+        width: 100%;
+        min-height: 0;
+        height: clamp(300px, 55vh, 560px);
+        max-height: 62vh;
+    }
+
+    .experience.is-fullscreen .track-information,
+    .experience:fullscreen .track-information { grid-area: track; width: 100%; }
+
+    .experience.is-fullscreen .lyrics-container,
+    .experience:fullscreen .lyrics-container { grid-area: lyrics; width: 100%; }
+
+    .experience.is-fullscreen .visualizer-section,
+    .experience:fullscreen .visualizer-section { grid-area: visualizer; width: 100%; }
+
+    .experience.is-fullscreen .playback-section,
+    .experience:fullscreen .playback-section { grid-area: playback; width: 100%; }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls { grid-area: controls; width: 100%; }
+
+    .experience.is-fullscreen .player-footer,
+    .experience:fullscreen .player-footer { grid-area: footer; width: 100%; }
+
+    .experience.is-fullscreen .lyrics-display,
+    .experience:fullscreen .lyrics-display {
+        min-height: clamp(54px, 8vh, 82px);
+    }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls {
+        justify-content: center;
+        gap: clamp(24px, 4vw, 46px);
+    }
+}
+
+/* En móvil vertical: se mantiene la composición completa, pero se adapta al alto. */
+@media (max-width: 760px) {
+    .player-header-actions { gap: 7px; }
+
+    .fullscreen-toggle {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+        border-radius: 11px;
+    }
+
+    .experience.is-fullscreen,
+    .experience:fullscreen {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100dvh;
+        padding:
+            env(safe-area-inset-top)
+            env(safe-area-inset-right)
+            env(safe-area-inset-bottom)
+            env(safe-area-inset-left);
+    }
+
+    .experience.is-fullscreen .ambient-interface,
+    .experience:fullscreen .ambient-interface {
+        top: max(10px, env(safe-area-inset-top));
+        left: 15px;
+        right: 15px;
+    }
+
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        top: auto;
+        right: 50%;
+        bottom: max(10px, env(safe-area-inset-bottom));
+        left: auto;
+        width: min(620px, calc(100vw - 24px));
+        max-height: calc(100dvh - 62px - env(safe-area-inset-top));
+        padding: clamp(13px, 2.5vw, 21px);
+        gap: clamp(9px, 1.7vh, 14px);
+        border-radius: 23px;
+        transform: translateX(50%);
+        overflow-y: auto;
+        animation: none;
+    }
+
+    .experience.is-fullscreen .player-visual,
+    .experience:fullscreen .player-visual {
+        min-height: clamp(115px, 23dvh, 190px);
+        max-height: 25dvh;
+    }
+
+    .experience.is-fullscreen .lyrics-display,
+    .experience:fullscreen .lyrics-display {
+        min-height: 48px;
+    }
+
+    .experience.is-fullscreen .lyrics-container,
+    .experience:fullscreen .lyrics-container {
+        padding: 10px 12px;
+    }
+
+    .experience.is-fullscreen .visualizer-section,
+    .experience:fullscreen .visualizer-section {
+        margin-top: -2px;
+    }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls {
+        gap: clamp(22px, 7vw, 34px);
+    }
+}
+
+/* En un teléfono apaisado, el reproductor pasa a la composición de dos columnas. */
+@media (max-width: 900px) and (max-height: 600px) and (orientation: landscape) {
+    .experience.is-fullscreen .ambient-interface,
+    .experience:fullscreen .ambient-interface {
+        display: none;
+    }
+
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        top: 50%;
+        right: 50%;
+        bottom: auto;
+        width: min(960px, calc(100vw - 24px));
+        max-height: calc(100dvh - 18px);
+        padding: 12px 16px;
+        gap: 7px;
+        border-radius: 18px;
+        transform: translate(50%, -50%);
+        display: grid;
+        grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+        grid-template-areas:
+            "header header"
+            "visual track"
+            "visual lyrics"
+            "visual visualizer"
+            "visual playback"
+            "visual controls"
+            "visual footer";
+        align-content: center;
+        align-items: center;
+        column-gap: 20px;
+        row-gap: 6px;
+        overflow-y: auto;
+    }
+
+    .experience.is-fullscreen .player-header,
+    .experience:fullscreen .player-header { grid-area: header; }
+
+    .experience.is-fullscreen .player-visual,
+    .experience:fullscreen .player-visual {
+        grid-area: visual;
+        height: min(55dvh, 330px);
+        min-height: 0;
+        max-height: 55dvh;
+    }
+
+    .experience.is-fullscreen .track-information,
+    .experience:fullscreen .track-information { grid-area: track; }
+
+    .experience.is-fullscreen .lyrics-container,
+    .experience:fullscreen .lyrics-container { grid-area: lyrics; }
+
+    .experience.is-fullscreen .visualizer-section,
+    .experience:fullscreen .visualizer-section { grid-area: visualizer; }
+
+    .experience.is-fullscreen .playback-section,
+    .experience:fullscreen .playback-section { grid-area: playback; }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls { grid-area: controls; }
+
+    .experience.is-fullscreen .player-footer,
+    .experience:fullscreen .player-footer { grid-area: footer; }
+
+    .experience.is-fullscreen .track-text h1,
+    .experience:fullscreen .track-text h1 { font-size: clamp(18px, 3.2vh, 27px); }
+
+    .experience.is-fullscreen .lyrics-display,
+    .experience:fullscreen .lyrics-display { min-height: 38px; }
+
+    .experience.is-fullscreen .lyrics-container,
+    .experience:fullscreen .lyrics-container { padding: 7px 10px; }
+
+    .experience.is-fullscreen .play-button,
+    .experience:fullscreen .play-button {
+        width: 43px;
+        height: 43px;
+        border-radius: 14px;
+    }
+
+    .experience.is-fullscreen .secondary-control,
+    .experience:fullscreen .secondary-control {
+        width: 33px;
+        height: 33px;
+    }
+
+    .experience.is-fullscreen .player-controls,
+    .experience:fullscreen .player-controls { gap: 20px; }
+
+    .experience.is-fullscreen .player-footer,
+    .experience:fullscreen .player-footer { min-height: 20px; }
+}
+
+/* En pantallas de escritorio bajas se compacta sin recortar controles. */
+@media (min-width: 761px) and (max-height: 700px) {
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        max-height: calc(100dvh - 24px);
+        padding: 14px 20px;
+        row-gap: 8px;
+    }
+
+    .experience.is-fullscreen .player-visual,
+    .experience:fullscreen .player-visual {
+        height: 48vh;
+        max-height: 48vh;
+    }
+
+    .experience.is-fullscreen .lyrics-display,
+    .experience:fullscreen .lyrics-display { min-height: 42px; }
+}
+
+/* Estado visual del botón: cambia el icono al maximizar. */
+.experience.is-fullscreen .fullscreen-toggle .fullscreen-enter-icon,
+.experience:fullscreen .fullscreen-toggle .fullscreen-enter-icon {
+    display: none;
+}
+
+.experience.is-fullscreen .fullscreen-toggle .fullscreen-exit-icon,
+.experience:fullscreen .fullscreen-toggle .fullscreen-exit-icon {
+    display: block;
+}
+
+/* El modo fallback también ocupa la ventana en navegadores sin Fullscreen API. */
+.experience.is-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+/* Reduce movimiento si el usuario así lo ha indicado en su dispositivo. */
+@media (prefers-reduced-motion: reduce) {
+    .experience.is-fullscreen .player-card,
+    .experience:fullscreen .player-card {
+        animation: none !important;
+    }
+}
